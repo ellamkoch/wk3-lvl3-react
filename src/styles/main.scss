@@ -1,0 +1,70 @@
+// Main Global Stylesheet
+// This file pulls in design variables and defines app-wide styling.
+// It handles:
+//   - Normalizing some default browser behavior
+//   - Global body styles
+//   - Layout containers
+//   - Shared UI patterns (cards, header, footer)
+
+ // Imports all SCSS variables (colors, fonts, radius, shadow)
+@use "./variables" as *;
+
+// Reset / Base Setup
+// Makes sizing predictable by including padding/border in element size
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Body (whole page)
+body {
+  margin: 0; // Removes browser's default spacing
+  font-family: $font-main; // Uses global font stack
+  background: radial-gradient(circle at top, #111827 0, $color-bg 50%); // Dark gradient background for whole app
+  color: $color-text-main; // Default text color
+}
+
+// Ensures the React root always fills the screen vertically
+#root {
+  min-height: 100vh;
+}
+// App Shell Layout
+.app-shell {
+  max-width: 1120px;  // Keeps content centered and readable
+  margin: 0 auto;    // Centers horizontally
+  padding: 1.5rem;   // Consistent spacing around content
+}
+
+// Card Component Pattern
+// Reusable visual style for TodayPage, AboutPage, NotFoundPage, etc.
+.card {
+  background-color: $color-surface;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-soft;
+  padding: 1.5rem;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+
+  &__title { //& is the parent selector and __(name) targets the BEM-style child element
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  &__subtitle {
+    font-size: 0.9rem;
+    color: $color-text-muted;
+  }
+}
+// Footer Styles
+.app-footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: $color-text-muted;
+  text-align: center;
+}

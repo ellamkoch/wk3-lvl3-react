@@ -16,7 +16,8 @@
 //  *     A callback function provided by the parent.
 //  *     This is triggered whenever the user selects a different unit system.
 
-
+//Bootstrap react imports
+import Form from 'react-bootstrap/Form';
 
 const UnitsToggle = ({ units, onChange }) => {
     //  handleChange
@@ -34,11 +35,11 @@ const UnitsToggle = ({ units, onChange }) => {
 
   return (
     <div className="units-toggle">
-      <label htmlFor="units-select">Units:</label>
-      <select id="units-select" value={units} onChange={handleChange}>
+      <Form.Select id="units-select" title="Units">
+        <option id="units-select" value={units} onChange={handleChange}>Units</option>
         <option value="metric">Metric (°C, km/h)</option>
         <option value="imperial">Imperial (°F, mph)</option>
-      </select>
+      </Form.Select>
     </div>
   );
 };

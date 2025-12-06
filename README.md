@@ -224,7 +224,8 @@ Added extensive comments explaining:
 ### **5. Upgraded Navigation Bar using React-Bootstrap**
 
 * Replaced plain links with a `<Navbar>` and `<Nav>` layout.
-* Added active-state underline styling using React Router’s `<NavLink>`.
+* Added active-state underline styling using React Router’s `<NavLink>`
+  * Had to switch to this from Nav.Link as React Bootstrap docs said to get styling and pages to work.
 * Moved all nav styling into SCSS.
 
 Active class is now calculated like:
@@ -274,6 +275,5 @@ All linters now pass cleanly.
   This was the only video that matched the JSX-based approach we’re using in class.
   [https://www.youtube.com/watch?v=qi32YwjoN2U&amp;t=270s](https://www.youtube.com/watch?v=qi32YwjoN2U&t=270s)
   * React Bootstrap docs for how to use and styling - [https://react-bootstrap.netlify.app/docs](https://react-bootstrap.netlify.app/docs)
-
-
+  * React Router Docs - [https://reactrouter.com/7.10.1/home](https://reactrouter.com/7.10.1/home)
 

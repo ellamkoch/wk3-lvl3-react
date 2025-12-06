@@ -20,7 +20,8 @@ const initialState = {
   error: null,
   location: null,
   current: null,
-  hourly: []
+  hourly: [],
+  daily: []
 };
 
 /**
@@ -47,7 +48,7 @@ function useWeather(city, units) {
   //   - Updating state
   // If no city exists, nothing runs.
   useEffect(() => {
-    if (!city) return; // ! checks to see if city variable is empty. if it is, it does nothing. 
+    if (!city) return; // ! checks to see if city variable is empty. if it is, it does nothing.
 
     // cancelled flag
     let cancelled = false; // Prevents state updates if the component unmounts before the API finishes.
@@ -60,12 +61,10 @@ function useWeather(city, units) {
 
         if (!location) {  // If the geocoding API could not find a matching location, and the component is still in use and not cancelled,
           if (!cancelled) {  // update the state with an error and clear out any old weather data.
+            //swapped to a spread separator with initialState to keep code cleaner and faster as it'll go through the whole string of values in the variable above.
             setState({
-              loading: false,
-              error: "Location not found.",
-              location: null,
-              current: null,
-              hourly: []
+              ...initialState,
+              error: `Could not find location for "{city}". Please try another City name.`
             });
           }
           return;
@@ -75,6 +74,7 @@ function useWeather(city, units) {
         // Extracts the pieces we need from the Api
         const current = raw.current_weather || null;
         const hourly = raw.hourly || {};
+        const daily = raw.daily || {};
         // Step 3: Update the state only if the component is still in use.
         if (!cancelled) { // If component is still in use, then its safe to update the state as listed below.
           setState({
@@ -82,7 +82,8 @@ function useWeather(city, units) {
             error: null,
             location,
             current,
-            hourly
+            hourly,
+            daily
           });
         }
 
@@ -90,11 +91,8 @@ function useWeather(city, units) {
         // this runs if the API call fails
         if (!cancelled) {
           setState({
-            loading: false,
-            error: "Could not load weather data. Please try again.",
-            location: null,
-            current: null,
-            hourly: []
+            ...initialState,
+            error: "An error occurred while fetching the weather data. Please try again later.",
           });
         }
       }

@@ -346,6 +346,23 @@ Converted this - rgba(65, 0, 109, 0.758) into this format - background-color: rg
 
 After updating it, all linters passed with no remaining errors.
 
+### 8. Fixing Console Bugs and Units not toggling
+
+So I noticed when I came back to this before starting Day 5, that the Temperature Units weren't changing like they should. I thought about when they last worked, which was before I applied the Bootstrap styles to that component. I checked the console logs and the errors were definitely coming from that component when I tried to make a change.
+
+So I did some research and looked at the Bootstrap with React Documentation. That looked correct, and it styled like I wanted. So I looked at the React documentation on form select. That led me to learn that when I had put in the Form.Select on the styling for bootstrap, I had essentially moved my select line. So I moved up the key, value and onChange code to the Form.Select line as shown below and the toggle then worked on all pages.
+
+```jsx
+  <div className="units-toggle">
+    <Form.Select id="units-select"
+      title="Units" value={units}
+      onChange={handleChange} >
+        <option value="metric">Metric (°C, km/h)</option>
+        <option value="imperial">Imperial (°F, mph)</option>
+    </Form.Select>
+  </div>
+```
+
 ### What I Learned on Day 4
 
 * How to build multi-component pages that share state
@@ -365,3 +382,4 @@ After updating it, all linters passed with no remaining errors.
 * Bootstrap 5.3 documentation: [https://getbootstrap.com/docs/5.3](https://getbootstrap.com/docs/5.3)
 * String `.split()` explanation (used for hourly timestamps):[https://www.youtube.com/watch?v=couYPD-SYww](https://www.youtube.com/watch?v=couYPD-SYww)
 * W3Schools - JavaScript String Split(): [https://www.w3schools.com/jsref/jsref_split.asp](https://www.w3schools.com/jsref/jsref_split.asp)
+

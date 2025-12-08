@@ -49,11 +49,11 @@ export default function HourlyForecastList ({ hourly, units, selectedDate }) {
 // Render the info on the page
 const hourlyRender = hoursForDay.map((hourObj) => (
     <Container>
-    <Row key={hourObj.time} className="hour-row">
-        <Col className="hour-row__time">{hourObj.time}</Col>
+        <Row key={hourObj.time} className="hour-row">
+            <Col className="hour-row__time">{hourObj.time}</Col>
 
-        <Col className="hour-row__temp">{Math.round(hourObj.temperature)}{temperatureUnit}</Col>
-    </Row>
+            <Col className="hour-row__temp">{Math.round(hourObj.temperature)}{temperatureUnit}</Col>
+        </Row>
     </Container>
 ));
 

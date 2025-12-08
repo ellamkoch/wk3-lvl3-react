@@ -1,9 +1,8 @@
-/**
 //  * UnitsToggle switches between metric and imperial units.
-* WHAT THIS DOES:
- * - Allows the user to switch between metric and imperial units.
- * - Renders a <select> dropdown with two options.
- * - When the user changes the selection, it tells the parent component.
+// * WHAT THIS DOES:
+//  * - Allows the user to switch between metric and imperial units.
+//  * - Renders a <select> dropdown with two options.
+//  * - When the user changes the selection, it tells the parent component.
 //  *
 //  * @param {object} props - Component props.
 //  * @param {"metric" | "imperial"} props.units - Current units.
@@ -35,8 +34,12 @@ const UnitsToggle = ({ units, onChange }) => {
 
   return (
     <div className="units-toggle">
-      <Form.Select id="units-select" title="Units">
-        <option id="units-select" value={units} onChange={handleChange}>Units</option>
+      <Form.Select
+        id="units-select"
+        title="Units"
+        value={units}
+        onChange={handleChange}
+      >
         <option value="metric">Metric (°C, km/h)</option>
         <option value="imperial">Imperial (°F, mph)</option>
       </Form.Select>

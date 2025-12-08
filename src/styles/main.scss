@@ -86,17 +86,14 @@ body {
   border-radius: 0.5rem;
 
   &:hover {
-    background-color: rgb(144 10 113 75.8%);
+    background-color: rgb(144 10 113 / 75.8%);
     color: #fff;
   }
 
   &:focus {
     background-color: rgb(62 7 98);
     color: #fff;
-
   }
-
-
 }
 
 // Footer Styles

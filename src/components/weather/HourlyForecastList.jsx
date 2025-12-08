@@ -1,5 +1,12 @@
 // This file creates the component for the hourly forecast list
 // for the date selected from the daily forecast list.
+// This file:
+// * Receives the full hourly dataset from the hook
+// * Receives `selectedDate` from WeekPage
+// * Splits `"YYYY-MM-DDTHH:MM"` into date + time
+// * Filters the hours to match whatever day was clicked
+// * Renders a simple time → temperature list
+
 //bootstrap imports for styles
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';

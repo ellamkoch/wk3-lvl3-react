@@ -75,7 +75,7 @@ I created global and UI-specific styles, including:
 #### 6. Reviewed routing tutorials
 
 Since routing wasn’t covered in lecture today, I watched beginner-friendly tutorials to get ahead.
-I wathced videos by Traversy & Net Ninja first, but the one that helped the most is listed in the Resources section below.
+I watched videos by Traversy & Net Ninja first, but the one that helped the most is listed in the Resources section below.
 
 #### 7. Ran the linters
 
@@ -270,7 +270,8 @@ All linters now pass cleanly.
 
 ## Day 4 – 7-Day Forecast, Hourly Forecast, Updated API Calls, and UI Enhancements
 
-Day 4 was where the Week page really came to life. We pulled in the daily forecast, added the hourly forecast (based on whichever day is selected), updated the API client, and polished the UI.
+In class today, we pulled in the daily forecast from the API and expanded the useWeather hook.
+For homework, we were to add in the hourly forecast (based on whichever day is selected), updated the API client, and beautify the UI.
 
 ### 1. Updated the API client to include daily forecast values
 
@@ -303,8 +304,6 @@ This component:
 * Applies a hover color using SCSS
 * Uses `d-flex flex-wrap` in the parent grid so tiles wrap and space evenly
 
-The highlight + hover styling turned out really clean.
-
 ### 4. Added `HourlyForecastList`
 
 This component:
@@ -315,9 +314,7 @@ This component:
 * Filters the hours to match whatever day was clicked
 * Renders a simple time → temperature list
 
-We kept the design clean and beginner-friendly.
-
-Removing the date from the time string is listed as a future enhancement.
+In the future, I'd like to figure out how to remove the date from the time string for the data that's shown on the page.
 
 ### 5. Updated WeekPage to render both Daily + Hourly
 
@@ -327,26 +324,22 @@ After selecting a day:
 * The hourly list automatically updates
 * No routing changes were required since everything lives inside WeekPage
 
-This was the first time wiring multiple components together using shared state from a parent page.
-
 ### 6. Bootstrap Styling + UI Improvements
 
-We used Bootstrap to:
+I used Bootstrap to:
 
 * Wrap the daily cards using a flexible grid layout
 * Keep the buttons compact while still interactive
 * Add hover, active, and selected states
 * Add spacing between tiles using flex utilities
 
-Overall, the page now feels much more like a real weather app.
-
 ### 7. Stylelint Fixes for Day 4
 
-I ran the linters again after finishing the UI updates. Everything was clean except for three SCSS issues regarding color notation:
+I ran the linters after finishing the UI updates. Everything was clean except for three SCSS issues regarding color notation:
 
-Expected "rgba" to be "rgb"
-Expected modern color-function notation
-Expected "0.758" to be "75.8%"
+* Expected "rgba" to be "rgb"
+* Expected modern color-function notation
+* Expected "0.758" to be "75.8%"
 
 Fixes applied:
 Converted this - rgba(65, 0, 109, 0.758) into this format - background-color: rgb(65 0 109 / 75.8%);
@@ -372,5 +365,3 @@ After updating it, all linters passed with no remaining errors.
 * Bootstrap 5.3 documentation: [https://getbootstrap.com/docs/5.3](https://getbootstrap.com/docs/5.3)
 * String `.split()` explanation (used for hourly timestamps):[https://www.youtube.com/watch?v=couYPD-SYww](https://www.youtube.com/watch?v=couYPD-SYww)
 * W3Schools - JavaScript String Split(): [https://www.w3schools.com/jsref/jsref_split.asp](https://www.w3schools.com/jsref/jsref_split.asp)
-
-

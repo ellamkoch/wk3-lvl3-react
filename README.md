@@ -268,12 +268,109 @@ Changed: rgb(65, 0, 109) to modern notation:rgb(65 0 109)
 
 All linters now pass cleanly.
 
+## Day 4 – 7-Day Forecast, Hourly Forecast, Updated API Calls, and UI Enhancements
+
+Day 4 was where the Week page really came to life. We pulled in the daily forecast, added the hourly forecast (based on whichever day is selected), updated the API client, and polished the UI.
+
+### 1. Updated the API client to include daily forecast values
+
+`fetchTodayWeather()` now requests Open-Meteo daily fields:
+
+* `temperature_2m_max`
+* `temperature_2m_min`
+* `weathercode`
+
+Also added the full `daily:` parameter array to match Day 4 requirements.
+
+### 2. Expanded `useWeather` to return daily forecast data
+
+Inside the hook:
+
+* Extracted `raw.daily`
+* Added it to state
+* Hook now returns `{ loading, error, location, current, hourly, daily }`
+
+This allowed the WeekPage to receive real daily API values.
+
+### 3. Built `DailyForecastList`
+
+This component:
+
+* Maps over the 7-day array
+* Displays each day’s date + min/max temps
+* Uses a Bootstrap `<Button>` with a custom class
+* Highlights the selected day using a `daily-card--selected` modifier
+* Applies a hover color using SCSS
+* Uses `d-flex flex-wrap` in the parent grid so tiles wrap and space evenly
+
+The highlight + hover styling turned out really clean.
+
+### 4. Added `HourlyForecastList`
+
+This component:
+
+* Receives the full hourly dataset from the hook
+* Receives `selectedDate` from WeekPage
+* Splits `"YYYY-MM-DDTHH:MM"` into date + time
+* Filters the hours to match whatever day was clicked
+* Renders a simple time → temperature list
+
+We kept the design clean and beginner-friendly.
+
+Removing the date from the time string is listed as a future enhancement.
+
+### 5. Updated WeekPage to render both Daily + Hourly
+
+After selecting a day:
+
+* The daily tiles highlight
+* The hourly list automatically updates
+* No routing changes were required since everything lives inside WeekPage
+
+This was the first time wiring multiple components together using shared state from a parent page.
+
+### 6. Bootstrap Styling + UI Improvements
+
+We used Bootstrap to:
+
+* Wrap the daily cards using a flexible grid layout
+* Keep the buttons compact while still interactive
+* Add hover, active, and selected states
+* Add spacing between tiles using flex utilities
+
+Overall, the page now feels much more like a real weather app.
+
+### 7. Stylelint Fixes for Day 4
+
+I ran the linters again after finishing the UI updates. Everything was clean except for three SCSS issues regarding color notation:
+
+Expected "rgba" to be "rgb"
+Expected modern color-function notation
+Expected "0.758" to be "75.8%"
+
+Fixes applied:
+Converted this - rgba(65, 0, 109, 0.758) into this format - background-color: rgb(65 0 109 / 75.8%);
+
+After updating it, all linters passed with no remaining errors.
+
+### What I Learned on Day 4
+
+* How to build multi-component pages that share state
+* How to transform API data using `.map()` and `.filter()`
+* How to split a timestamp string in JavaScript (`"T"` separator)
+* How to create interactive UI elements (daily tiles)
+* How to style selected vs. hover vs. default states
+* How to wire Bootstrap utilities into React layouts
+* How to clean up SCSS to satisfy strict Stylelint rules
+
 ## Resources
 
 * React Router Tutorial (with JSX examples):
   This was the only video that matched the JSX-based approach we’re using in class.
   [https://www.youtube.com/watch?v=qi32YwjoN2U&amp;t=270s](https://www.youtube.com/watch?v=qi32YwjoN2U&t=270s)
-  * React Bootstrap docs for how to use and styling - [https://react-bootstrap.netlify.app/docs](https://react-bootstrap.netlify.app/docs)
-
+* React Bootstrap docs for how to use and styling - [https://react-bootstrap.netlify.app/docs](https://react-bootstrap.netlify.app/docs)
+* Bootstrap 5.3 documentation: [https://getbootstrap.com/docs/5.3](https://getbootstrap.com/docs/5.3)
+* String `.split()` explanation (used for hourly timestamps):[https://www.youtube.com/watch?v=couYPD-SYww](https://www.youtube.com/watch?v=couYPD-SYww)
+* W3Schools - JavaScript String Split(): [https://www.w3schools.com/jsref/jsref_split.asp](https://www.w3schools.com/jsref/jsref_split.asp)
 
 

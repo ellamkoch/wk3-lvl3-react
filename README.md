@@ -353,7 +353,7 @@ So I noticed when I came back to this before starting Day 5, that the Temperatur
 So I did some research and looked at the Bootstrap with React Documentation. That looked correct, and it styled like I wanted. So I looked at the React documentation on form select. That led me to learn that when I had put in the Form.Select on the styling for bootstrap, I had essentially moved my select line. So I moved up the key, value and onChange code to the Form.Select line as shown below and the toggle then worked on all pages.
 
 ```jsx
-  <div className="units-toggle">
+<div className="units-toggle">
     <Form.Select id="units-select"
       title="Units" value={units}
       onChange={handleChange} >
@@ -366,12 +366,17 @@ So I did some research and looked at the Bootstrap with React Documentation. Tha
 ### What I Learned on Day 4
 
 * How to build multi-component pages that share state
-* How to transform API data using `.map()` and `.filter()`
+* Got more practice transforming API data with `.map()` and `.filter()`, especially using them on real hourly forecast data instead of simple example arrays.
 * How to split a timestamp string in JavaScript (`"T"` separator)
 * How to create interactive UI elements (daily tiles)
 * How to style selected vs. hover vs. default states
 * How to wire Bootstrap utilities into React layouts
+* The difference between CSS and SCSS and how to use nested selectors
 * How to clean up SCSS to satisfy strict Stylelint rules
+
+## Day 5 - Bundling and Publishing
+
+
 
 ## Resources
 
@@ -382,4 +387,5 @@ So I did some research and looked at the Bootstrap with React Documentation. Tha
 * Bootstrap 5.3 documentation: [https://getbootstrap.com/docs/5.3](https://getbootstrap.com/docs/5.3)
 * String `.split()` explanation (used for hourly timestamps):[https://www.youtube.com/watch?v=couYPD-SYww](https://www.youtube.com/watch?v=couYPD-SYww)
 * W3Schools - JavaScript String Split(): [https://www.w3schools.com/jsref/jsref_split.asp](https://www.w3schools.com/jsref/jsref_split.asp)
+* Open-Meteo API documentation  - [https://open-meteo.com/](https://open-meteo.com/)
 

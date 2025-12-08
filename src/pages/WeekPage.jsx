@@ -6,6 +6,7 @@ import { useState } from "react";
 import SearchBar from "../components/weather/SearchBar.jsx";
 import UnitsToggle from "../components/weather/UnitsToggle.jsx";
 import DailyForecastList from "../components/weather/DailyForecastList.jsx";
+import HourlyForecastList from "../components/weather/HourlyForecastList.jsx";
 
 //custom hook imports
 import { useWeather } from "../hooks/useWeather.js";
@@ -31,6 +32,8 @@ export default function WeekPage() {
 //returns and object containing loading, error, location, current, hourly, and daily weather info
 //whenever units or city changes, hook reruns and fetches fresh data automatically
   const weatherState = useWeather(city, units);
+
+  const selectedDate = weatherState.daily?.time?.[selectedDayIndex] || null;
 //event handler for new city search.
   const handleSearch = (newCity) => { //when a new city is entered in the search bar
     setCity(newCity); // the new city is updated as the city searched
@@ -47,7 +50,7 @@ export default function WeekPage() {
     setSelectedDayIndex(index); // so we can highlight it on the page.
   };
 
-  
+
 // page layout for the weekly forecast.
   return (
     <section>
@@ -64,18 +67,23 @@ export default function WeekPage() {
         {weatherState.error && <p style={{ color: "#f97373" }}>{weatherState.error}</p>}
       </div>
 
-      {weatherState.loading ? (
-        <Spinner animation="border" />//ternary operator to show the bootstrap spinner or the daily forecast card
+      {weatherState.loading ? ( //ternary operator to show the bootstrap spinner or the daily forecast card
+        <Spinner animation="border" /> //daily and hourly info are then listed below for the page
       ) : (
+        <div>
         <DailyForecastList
           daily={weatherState.daily}
           units={units}
           onSelectDay={handleSelectDay}
-          selectedIndex={selectedDayIndex}
+          selectedIndex={selectedDate}
         />
+        <HourlyForecastList
+          hourly={weatherState.hourly}
+          units={units}
+          selectedDate={selectedDate}
+        />
+      </div>
       )}
-      {/* HomeWork: Implement the HourlyForecastList */}
-      {/* e.g. <HourlyForecastList dailyIndex={selectedDayIndex} hourly={weatherState.hourly} /> */}
-    </section>
+      </section>
   );
 }

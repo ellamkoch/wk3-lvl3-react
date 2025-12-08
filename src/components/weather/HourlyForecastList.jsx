@@ -1,6 +1,9 @@
 // This file creates the component for the hourly forecast list
 // for the date selected from the daily forecast list.
-
+//bootstrap imports for styles
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default function HourlyForecastList ({ hourly, units, selectedDate }) {
     if (!hourly || !hourly.time || hourly.time.length === 0 || !selectedDate) {
@@ -38,11 +41,13 @@ export default function HourlyForecastList ({ hourly, units, selectedDate }) {
         }
 // Render the info on the page
 const hourlyRender = hoursForDay.map((hourObj) => (
-    <div key={hourObj.time} className="hour-row">
-        <p className="hour-row__time">{hourObj.time}</p>
+    <Container>
+    <Row key={hourObj.time} className="hour-row">
+        <Col className="hour-row__time">{hourObj.time}</Col>
 
-        <p className="hour-row__temp">{Math.round(hourObj.temperature)}{temperatureUnit}</p>
-    </div>
+        <Col className="hour-row__temp">{Math.round(hourObj.temperature)}{temperatureUnit}</Col>
+    </Row>
+    </Container>
 ));
 
     return ( //wraps it in a div to display it.

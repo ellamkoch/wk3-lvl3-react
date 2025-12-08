@@ -81,6 +81,24 @@ body {
   padding-bottom: 0.25rem;
 }
 
+//Daily Cards
+.daily-card {
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: rgba(144, 10, 113, 0.758);
+    color: #fff;
+  }
+
+  &:focus {
+    background-color: rgb(62 7 98);
+    color: #fff;
+
+  }
+
+
+}
+
 // Footer Styles
 .app-footer {
   margin-top: 2rem;

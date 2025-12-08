@@ -12,6 +12,9 @@
  * @param {(index: number) => void} props.onSelectDay - Called when a day is clicked.
  * @param {number} props.selectedIndex
  */
+// bootstrap import for styling
+import Button from 'react-bootstrap/Button';
+
 export default function DailyForecastList({ daily, units, onSelectDay, selectedIndex }) {
   //This is a safety check. If there is no daily data, it returns the msg below.
     if (!daily || !daily.time || daily.time.length === 0) { // || means or and === strictly equal to 0,
@@ -34,7 +37,7 @@ export default function DailyForecastList({ daily, units, onSelectDay, selectedI
     const isSelected = index === selectedIndex; //tells what date is selected
 
     return ( //returns the daily card selected.
-      <button
+      <Button variant="outline-light"
         key={dateString} //react uses this to track each item when lists update
         type="button"
         className={isSelected ? "daily-card daily-card--selected" : "daily-card"} //if selected is true, add the css class daily-card--selected.
@@ -45,7 +48,7 @@ export default function DailyForecastList({ daily, units, onSelectDay, selectedI
         <p className="daily-card__temps">
           {Math.round(max)}{temperatureUnit} / {Math.round(min)}{temperatureUnit}
         </p>
-      </button>
+      </Button>
     );// rounds temps up/down to the closest whole #.
   });
 
@@ -53,7 +56,7 @@ export default function DailyForecastList({ daily, units, onSelectDay, selectedI
     <div className="card" style={{ marginBottom: "1rem" }}>
       <h2>7-Day forecast</h2>
 
-      <div className="daily-grid">
+      <div className="daily-grid d-flex flex-wrap p-2 gap-3">
         {dailyRender}
       </div>
     </div>

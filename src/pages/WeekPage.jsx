@@ -14,6 +14,7 @@ import { useWeather } from "../hooks/useWeather.js";
 // Bootstrap imports
 import Spinner from 'react-bootstrap/Spinner';
 
+
 /**
  * WeekPage:
  *   - Stores the current city and measurement units (metric/imperial)

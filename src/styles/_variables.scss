@@ -1,0 +1,19 @@
+// Global Design Variables
+// These variables define the design system for your whole app.
+// Instead of repeating hex codes or font names everywhere,
+// you define them once here and then reuse them throughout your SCSS.
+
+// Core Colors
+$color-bg: #02030f;
+$color-surface: #070b1f;
+$color-accent: #4f46e5;
+$color-accent-soft: rgb(79 70 229 / 20%);
+$color-text-main: #e5e7eb;
+$color-text-muted: #9ca3af;
+
+// Shape & Shadow
+$radius-lg: 1rem;
+$shadow-soft: 0 10px 30px rgb(0 0 0 / 40%);
+
+// Typography
+$font-main: system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", sans-serif;

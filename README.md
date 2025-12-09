@@ -376,7 +376,85 @@ So I did some research and looked at the Bootstrap with React Documentation. Tha
 
 ## Day 5 - Bundling and Publishing
 
+Today’s focus was preparing the project for deployment and making sure the production build behaved the same as the development version. This involved updating configuration files, running Vite’s build tools, testing the preview output, and then publishing the app using GitHub Pages and Netlify. Deployment can be tricky the first time through, but everything ended up working correctly once the build pipeline and branch settings were configured properly.
 
+1. Ran the production build and preview locally
+
+I started by creating the optimized, production-ready build:
+npm run build
+
+Then I used Vite’s preview server to confirm everything rendered correctly:
+npm run preview
+
+The preview looked identical to the development version, including routing, the unit toggle, daily tiles, and hourly forecast.
+
+### 2. Added deployment script to package.json
+
+To publish the project to GitHub Pages, I added the following script to the package.json file:
+"deploy": "gh-pages -d dist"
+
+This tells the `gh-pages` package to take the build output from the `dist` folder and push it to the special `gh-pages` branch GitHub Pages uses for hosting.
+
+### 3. Installed the `gh-pages` package
+
+I realized the deploy command wouldn’t work until the dependency was installed, so I added it:
+npm install gh-pages --save-dev
+After installing it, the deployment script worked as expected.
+
+### 4. Updated Vite configuration for GitHub Pages
+
+GitHub Pages serves React apps from a sub-path, which can break asset loading unless Vite’s `base` setting is adjusted. I added:
+base: './',
+to `vite.config.js`, which ensures images, scripts, and styles load correctly no matter what path the site is hosted from.
+
+### 5. Deployed to GitHub Pages
+
+Once everything was configured, I ran:
+npm run deploy
+
+This created the `gh-pages` branch and published the production build automatically.
+
+**GitHub Pages link:**
+
+[https://ellamkoch.github.io/wk3-lvl3-react/](https://ellamkoch.github.io/wk3-lvl3-react/)
+
+Everything worked properly once the page refreshed and assets resolved from the correct base path.
+
+### 6. Cleaned up branches and merged work into main
+
+Before deploying to Netlify, I merged the Day 4 branch into `main` so Netlify would have access to the full React source code (including `package.json`). This is important because Netlify builds the project from source instead of serving the already-built files like GitHub Pages does.
+
+### 7. Deployed to Netlify
+
+Netlify failed at first because it was looking at the `gh-pages` branch, which only contains the static site and not the full React project. After updating the deployment settings to use the **main** branch, Netlify was able to:
+
+* Install dependencies
+* Run `npm run build`
+* Publish the `dist` folder
+
+Everything deployed cleanly on the second attempt.
+
+**Netlify link:**
+
+[https://lvl3-wk3-react.netlify.app/](https://lvl3-wk3-react.netlify.app/)
+
+Both GitHub Pages and Netlify now serve the same production build.
+
+### 8. Known non-breaking console warning
+
+There is still a minor React warning about needing a unique `key` for one of the hourly list rows. It doesn’t affect the build or functionality, so I left it for now and will fix it later once I learn what it is.
+
+### What I Learned on Day 5
+
+* How to generate a production build using Vite
+* How to preview a build locally before publishing
+* How to configure Vite’s `base` path for GitHub Pages
+* How to use the `gh-pages` package to deploy a static site
+* The difference between GitHub Pages (serves static files) and Netlify (builds from source)
+* How to set up Netlify to deploy from the correct branch
+* How to troubleshoot missing `package.json` errors in build logs
+* How to verify a deployment and test for routing issues in production
+* How to coordinate branch merges before deploying
 
 ## Resources
 

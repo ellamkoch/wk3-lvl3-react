@@ -3,6 +3,11 @@
 //must import features that we plan to use
 import { useState } from "react";
 
+//import for react bootstrap styles
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 /**
  * SearchBar is a controlled input for city search.
@@ -49,21 +54,31 @@ const SearchBar = ({ onSearch }) => {
 
 // The html label below in the form is is Aria, and it is visually hidden but still available to screen readers.
   return (
-    <form onSubmit={handleSubmit} className="search-bar">
-
-      <label htmlFor="search-input" className="sr-only">
-        Search city
-      </label>
-      <input
-        id="search-input"
-        type="text"
-        placeholder="Search for a city..."
-        value={query}
-        onChange={(event) => setQuery(event.target.value)} // updates the state
-      />
-      <button type="submit">Search</button>
-    </form>
+    <Form onSubmit={handleSubmit} className="search-bar d-flex">
+      <Form.Group className="search " >
+      <Form.Label htmlFor="search-input" className="sr-only">
+            Search City
+          </Form.Label>
+            <div>
+              <Row className="g-0">
+                <Col xs={11}>
+                  <Form.Control
+                    id="search-input"
+                    type="text"
+                    placeholder="Search for a city..."
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)} // updates the state
+                  />
+                </Col>
+                <Col xs={1}>
+                  <Button variant="primary" type="submit">Search</Button>
+                </Col>
+              </Row>
+            </div>
+      </Form.Group>
+    </Form>
   );
 };
+//xs with col # is part of the bootstrap grid. 12 total columns in the bootstrap grid.
 
 export default SearchBar;

@@ -13,6 +13,12 @@ import WeekPage from "../pages/WeekPage";
 import AboutPage from "../pages/AboutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
+//Nav Bar Imports for Bootstrap
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
+
 // AppRouter is the “map” of our app.
 //  * It connects a URL → a page component.
 //  * Example:
@@ -25,21 +31,32 @@ function AppRouter() {
   return (
     // BrowserRouter enables client-side navigation. Without this, NavLink and Routes will NOT work.
     // MainLayout wraps all pages with header + footer
+    //Navbar is for styling the navbar with bootstrap/react
+    //container tells bootstrap its a container
     // Nav is a simple navigation bar.
     // NavLink adds an automatic "active" style. The inline margin is temporary spacing.
     // "end" tells React Router: Only mark this active when URL is EXACTLY "/"
     //NavLink to the weekly forecast page
     <BrowserRouter>
       <MainLayout>
-        <nav className="card" style={{ marginBottom: "1rem" }}>
-          <NavLink to="/" end>
-            Today
-          </NavLink>
-          {" | "}
-          <NavLink to="/week">Week</NavLink>
-          {" | "}
-          <NavLink to="/about">About</NavLink>
-        </nav>
+        <Navbar data-bs-theme="dark">
+        <Container>
+          <Nav variant="underline" defaultActiveKey="/" className="navbar-links d-flex p-4" style={{ marginBottom: "1rem" }}>
+            <NavLink  to="/" end className={({ isActive }) => `nav-link ${isActive ? "nav-link-active" : ""}`
+        }>
+              Today
+            </NavLink >
+            {" "}
+            <NavLink  to="/week" className={({ isActive }) => `nav-link ${isActive ? "nav-link-active" : ""}`}
+            >Week
+            </NavLink>
+            {" "}
+            <NavLink  to="/about" className={({ isActive }) => `nav-link ${isActive ? "nav-link-active" : ""}`}>
+            About
+            </NavLink >
+          </Nav>
+      </Container>
+    </Navbar>
 
         {/* We define the routes here */}
         <Routes>

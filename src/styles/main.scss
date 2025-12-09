@@ -43,6 +43,7 @@ body {
   border-radius: $radius-lg;
   box-shadow: $shadow-soft;
   padding: 1.5rem;
+  color: #fff;
 }
 
 .app-header {
@@ -61,6 +62,25 @@ body {
     color: $color-text-muted;
   }
 }
+
+// Navbar
+.navbar {
+  background-color: $color-surface;
+  box-shadow: $shadow-soft;
+  border-radius: $radius-lg;
+}
+
+.navbar-links .nav-link {
+  color: #d5d7ff; /* normal link color */
+  text-decoration: none;
+}
+
+.navbar-links .nav-link-active {
+  color: rgb(138 26 213);
+  border-bottom: 2px solid rgb(138 26 213);
+  padding-bottom: 0.25rem;
+}
+
 // Footer Styles
 .app-footer {
   margin-top: 2rem;

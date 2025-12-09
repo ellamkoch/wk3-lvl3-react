@@ -1,36 +1,26 @@
 
 // App.jsx is the “map” of your whole application.
-//  * WHAT THIS DOES RIGHT NOW:
-//  * - Renders the MainLayout wrapper (Header + Footer).
-//  * - Displays ONLY the TodayPage inside that layout.
-
-//importing pages
-// App.jsx imports pages ONLY because routing needs them
-import MainLayout from "./components/layout/MainLayout";
-import TodayPage from "./pages/TodayPage";
-import AboutPage from "./pages/AboutPage";
-import NotFoundPage from "./pages/NotFoundPage";
-
+// AppRouter handles All Routing URLs -> page components)
+//Imports appRouter function
+import AppRouter from "./router/AppRouter";
 
 // We need to import the global styles so they apply to the whole app
 import "./styles/main.scss";
 
 /**
  * Root application component.
- * For Day 1 we render only the TodayPage.
+ WHAT THIS DOES:
+ * - Acts as the true “root” of the React app.
+ * - Instead of holding any UI directly, it now delegates everything to AppRouter.
  */
+//  WHY:
+//  * - AppRouter contains the routing setup and decides
+//  *   which page to show based on the URL.
+//  * - Keeping App clean makes the project easier to scale.
 function App() {
-
-  return ( // Renders the MainLayout component, and puts TodayPage INSIDE of it.”
-    <Router>
-      <Routes>
-        <Route path ="/">
-    //MainLayout wraps whatever you put inside it with header/footer, page content, etc.
-    <MainLayout>
-      <TodayPage />
-    </MainLayout>
-      </Routes>
-    </Router>
+  return (
+    // Renders the router, which will render the correct page.
+    <AppRouter />
   );
 }
 

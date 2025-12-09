@@ -224,7 +224,8 @@ Added extensive comments explaining:
 ### **5. Upgraded Navigation Bar using React-Bootstrap**
 
 * Replaced plain links with a `<Navbar>` and `<Nav>` layout.
-* Added active-state underline styling using React Router’s `<NavLink>`.
+* Added active-state underline styling using React Router’s `<NavLink>`
+  * Had to switch to this from Nav.Link as React Bootstrap docs said to get styling and pages to work.
 * Moved all nav styling into SCSS.
 
 Active class is now calculated like:

@@ -1,12 +1,3 @@
-// This file contains a helper function that talks to the Open-Meteo Forecast API.
-// It fetches both current weather and hourly weather for a given latitude/longitude pair.
-//
-// Keeping API calls in a separate "services" folder helps organize the code.
-// Components and hooks do not need to know how URLs or params work; they simply call fetchTodayWeather(...) and receive clean data back.
-
-// This function does not transform or clean the data. The hook (useWeather) handles that. This function is only concerned with calling the API.
-
-//Axios Import
 import axios from "axios";
 
 /**
@@ -18,25 +9,32 @@ import axios from "axios";
  * @returns {Promise<object>} Raw API data.
  */
 export async function fetchTodayWeather(latitude, longitude, units) {
-  // Maps our units toggle to Open-Meteo units to the specific unit strings the API expects in its query params
+  // Map our units toggle to Open-Meteo units.
   const isMetric = units === "metric";
 
-  // Query parameters sent to the Open-Meteo forecast endpoint.
-  // These control lat, long, hourly fields, current weather, units for temp and wind, and timezones
   const params = {
     latitude,
     longitude,
+
+    // Request these hourly fields.
     hourly: ["temperature_2m", "relativehumidity_2m", "apparent_temperature", "windspeed_10m"],
+
+    // Request current weather.
     current_weather: true,
-    timezone: "auto", // timezone chosen based on location
+
+    // Request timezone and units.
+    timezone: "auto",
+
+    // Request daily
+    // New for Day 4: daily forecast values.
+    daily: ["temperature_2m_max", "temperature_2m_min", "weathercode"],
+
     temperature_unit: isMetric ? "celsius" : "fahrenheit",
     windspeed_unit: isMetric ? "kmh" : "mph"
   };
-  // baseurl
-  const url = "https://api.open-meteo.com/v1/forecast";
 
-  //using axios to send a get request. axios builds query string automatically and parses json response.
+  const url = "https://api.open-meteo.com/v1/forecast"; //base url
+
   const response = await axios.get(url, { params });
-  return response.data; // returns only parsed data.
-  // useWeather hook decides how to interpret and structures data for the UI.
+  return response.data;
 }

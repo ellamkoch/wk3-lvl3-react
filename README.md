@@ -75,7 +75,7 @@ I created global and UI-specific styles, including:
 #### 6. Reviewed routing tutorials
 
 Since routing wasn’t covered in lecture today, I watched beginner-friendly tutorials to get ahead.
-I wathced videos by Traversy & Net Ninja first, but the one that helped the most is listed in the Resources section below.
+I watched videos by Traversy & Net Ninja first, but the one that helped the most is listed in the Resources section below.
 
 #### 7. Ran the linters
 
@@ -269,11 +269,124 @@ Changed: rgb(65, 0, 109) to modern notation:rgb(65 0 109)
 
 All linters now pass cleanly.
 
+## Day 4 – 7-Day Forecast, Hourly Forecast, Updated API Calls, and UI Enhancements
+
+In class today, we pulled in the daily forecast from the API and expanded the useWeather hook.
+For homework, we were to add in the hourly forecast (based on whichever day is selected), updated the API client, and beautify the UI.
+
+### 1. Updated the API client to include daily forecast values
+
+`fetchTodayWeather()` now requests Open-Meteo daily fields:
+
+* `temperature_2m_max`
+* `temperature_2m_min`
+* `weathercode`
+
+Also added the full `daily:` parameter array to match Day 4 requirements.
+
+### 2. Expanded `useWeather` to return daily forecast data
+
+Inside the hook:
+
+* Extracted `raw.daily`
+* Added it to state
+* Hook now returns `{ loading, error, location, current, hourly, daily }`
+
+This allowed the WeekPage to receive real daily API values.
+
+### 3. Built `DailyForecastList`
+
+This component:
+
+* Maps over the 7-day array
+* Displays each day’s date + min/max temps
+* Uses a Bootstrap `<Button>` with a custom class
+* Highlights the selected day using a `daily-card--selected` modifier
+* Applies a hover color using SCSS
+* Uses `d-flex flex-wrap` in the parent grid so tiles wrap and space evenly
+
+### 4. Added `HourlyForecastList`
+
+This component:
+
+* Receives the full hourly dataset from the hook
+* Receives `selectedDate` from WeekPage
+* Splits `"YYYY-MM-DDTHH:MM"` into date + time
+* Filters the hours to match whatever day was clicked
+* Renders a simple time → temperature list
+
+In the future, I'd like to figure out how to remove the date from the time string for the data that's shown on the page.
+
+### 5. Updated WeekPage to render both Daily + Hourly
+
+After selecting a day:
+
+* The daily tiles highlight
+* The hourly list automatically updates
+* No routing changes were required since everything lives inside WeekPage
+
+### 6. Bootstrap Styling + UI Improvements
+
+I used Bootstrap to:
+
+* Wrap the daily cards using a flexible grid layout
+* Keep the buttons compact while still interactive
+* Add hover, active, and selected states
+* Add spacing between tiles using flex utilities
+
+### 7. Stylelint Fixes for Day 4
+
+I ran the linters after finishing the UI updates. Everything was clean except for three SCSS issues regarding color notation:
+
+* Expected "rgba" to be "rgb"
+* Expected modern color-function notation
+* Expected "0.758" to be "75.8%"
+
+Fixes applied:
+Converted this - rgba(65, 0, 109, 0.758) into this format - background-color: rgb(65 0 109 / 75.8%);
+
+After updating it, all linters passed with no remaining errors.
+
+### 8. Fixing Console Bugs and Units not toggling
+
+So I noticed when I came back to this before starting Day 5, that the Temperature Units weren't changing like they should. I thought about when they last worked, which was before I applied the Bootstrap styles to that component. I checked the console logs and the errors were definitely coming from that component when I tried to make a change.
+
+So I did some research and looked at the Bootstrap with React Documentation. That looked correct, and it styled like I wanted. So I looked at the React documentation on form select. That led me to learn that when I had put in the Form.Select on the styling for bootstrap, I had essentially moved my select line. So I moved up the key, value and onChange code to the Form.Select line as shown below and the toggle then worked on all pages.
+
+```jsx
+<div className="units-toggle">
+    <Form.Select id="units-select"
+      title="Units" value={units}
+      onChange={handleChange} >
+        <option value="metric">Metric (°C, km/h)</option>
+        <option value="imperial">Imperial (°F, mph)</option>
+    </Form.Select>
+  </div>
+```
+
+### What I Learned on Day 4
+
+* How to build multi-component pages that share state
+* Got more practice transforming API data with `.map()` and `.filter()`, especially using them on real hourly forecast data instead of simple example arrays.
+* How to split a timestamp string in JavaScript (`"T"` separator)
+* How to create interactive UI elements (daily tiles)
+* How to style selected vs. hover vs. default states
+* How to wire Bootstrap utilities into React layouts
+* The difference between CSS and SCSS and how to use nested selectors
+* How to clean up SCSS to satisfy strict Stylelint rules
+
+## Day 5 - Bundling and Publishing
+
+
+
 ## Resources
 
 * React Router Tutorial (with JSX examples):
   This was the only video that matched the JSX-based approach we’re using in class.
   [https://www.youtube.com/watch?v=qi32YwjoN2U&amp;t=270s](https://www.youtube.com/watch?v=qi32YwjoN2U&t=270s)
-  * React Bootstrap docs for how to use and styling - [https://react-bootstrap.netlify.app/docs](https://react-bootstrap.netlify.app/docs)
-  * React Router Docs - [https://reactrouter.com/7.10.1/home](https://reactrouter.com/7.10.1/home)
+* React Bootstrap docs for how to use and styling - [https://react-bootstrap.netlify.app/docs](https://react-bootstrap.netlify.app/docs)
+* Bootstrap 5.3 documentation: [https://getbootstrap.com/docs/5.3](https://getbootstrap.com/docs/5.3)
+* String `.split()` explanation (used for hourly timestamps):[https://www.youtube.com/watch?v=couYPD-SYww](https://www.youtube.com/watch?v=couYPD-SYww)
+* W3Schools - JavaScript String Split(): [https://www.w3schools.com/jsref/jsref_split.asp](https://www.w3schools.com/jsref/jsref_split.asp)
+* Open-Meteo API documentation  - [https://open-meteo.com/](https://open-meteo.com/)
 
